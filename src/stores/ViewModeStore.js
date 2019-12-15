@@ -1,5 +1,6 @@
 import { observable, action } from 'mobx';
-import { getFilterOptions, getCSVFile } from '@/stores/wrd_apis';
+import { getFilterOptionsBuilding, getFilterOptionsDistrict, getFilterOptionsClass, getCSVFile } from '@/stores/wrd_apis';
+// import { getFilterOptionsBuilding, getFilterOptionsDistrict, getFilterOptionsClass } from './wrd_apis';
 
 class ViewModeStore {
   @observable.shallow optBuildings = [];
@@ -15,17 +16,9 @@ class ViewModeStore {
   @observable isStSet = false;
 
   constructor() {
-    // Building
-    getFilterOptions('building')
-      .then(options => {
-        for (let i = 0; i < options.length; i++) {
-          this.optBuildings.push(options[i].name || '');
-        }
-        this.isBdSet = true;
-      });
 
     // District
-    getFilterOptions('district')
+    getFilterOptionsDistrict()
       .then(options => {
         for (let i = 0; i < options.length; i++) {
           this.optDistricts.push(options[i].name || '');
@@ -33,8 +26,17 @@ class ViewModeStore {
         this.isDsSet = true;
       });
 
+    // Building
+    getFilterOptionsBuilding('635568,635504,619716,635650,635603,635586,619594')
+      .then(options => {
+        for (let i = 0; i < options.length; i++) {
+          this.optBuildings.push(options[i].name || '');
+        }
+        this.isBdSet = true;
+      });
+
     // class
-    getFilterOptions('class')
+    getFilterOptionsClass('635652,635570,619717')
       .then(options => {
         for (let i = 0; i < options.length; i++) {
           this.optClasses.push(options[i].name || '');
@@ -42,14 +44,14 @@ class ViewModeStore {
         this.isClSet = true;
       });
 
-    // class
-    getFilterOptions('student')
-      .then(options => {
-        for (let i = 0; i < options.length; i++) {
-          this.optStudents.push(options[i].name || '');
-        }
-        this.isStSet = true;
-      });
+    // // student
+    // getFilterOptions('student')
+    //   .then(options => {
+    //     for (let i = 0; i < options.length; i++) {
+    //       this.optStudents.push(options[i].name || '');
+    //     }
+    //     this.isStSet = true;
+    //   });
   }
 
   @action.bound getDownloadFile() {
