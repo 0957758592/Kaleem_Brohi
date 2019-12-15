@@ -2,7 +2,6 @@ import React from 'react';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider as MuiThemeProvider, StylesProvider, jssPreset } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-/* eslint-disable-next-line */
 import { create } from 'jss';
 import { ThemeProvider } from 'styled-components/macro';
 import { Provider, inject, observer } from 'mobx-react';

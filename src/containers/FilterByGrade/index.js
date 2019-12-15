@@ -32,12 +32,13 @@ export default function FilterByGrade() {
           value={age}
           onChange={handleChange}
         >
-          <MenuItem value={10}>1</MenuItem>
-          <MenuItem value={20}>2</MenuItem>
-          <MenuItem value={30}>3</MenuItem>
-          <MenuItem value={40}>4</MenuItem>
-          <MenuItem value={50}>5</MenuItem>
-          <MenuItem value={60}>6</MenuItem>
+          <MenuItem value={}></MenuItem>
+          <MenuItem value={10}>3</MenuItem>
+          <MenuItem value={20}>4</MenuItem>
+          <MenuItem value={30}>5</MenuItem>
+          <MenuItem value={40}>6</MenuItem>
+          <MenuItem value={50}>7</MenuItem>
+          <MenuItem value={60}>8</MenuItem>
         </Select>
       </FormControl>
     </div>
