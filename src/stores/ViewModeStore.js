@@ -32,9 +32,7 @@ class ViewModeStore {
     });
 
     // Building
-    getFilterOptionsBuilding(
-      "635568,635504,619716,635650,635603,635586,619594"
-    ).then(options => {
+    getFilterOptionsBuilding().then(options => {
       for (let i = 0; i < options.length; i++) {
         this.optBuildings.push(options[i] || "");
       }
@@ -42,7 +40,7 @@ class ViewModeStore {
     });
 
     // class
-    getFilterOptionsClass("635652,635570,619717").then(options => {
+    getFilterOptionsClass().then(options => {
       for (let i = 0; i < options.length; i++) {
         this.optClasses.push(options[i] || "");
       }
