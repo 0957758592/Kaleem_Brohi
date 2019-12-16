@@ -9,7 +9,6 @@ import FormControl from "@material-ui/core/FormControl";
 import ListItemText from "@material-ui/core/ListItemText";
 import Select from "@material-ui/core/Select";
 import Checkbox from "@material-ui/core/Checkbox";
-import { getFilterOptionsClass } from "@/stores/wrd_apis";
 
 import { STORE_KEYS } from "@/stores";
 
@@ -42,7 +41,14 @@ const MenuProps = {
   }
 };
 
-const MultipleSelect = ({ name, options, isSet, setOptions,  getDataFromServer}) => {
+const MultipleSelect = ({
+  name,
+  options,
+  isSet,
+  setOptions,
+  getDataFromServer,
+  setPostQuery
+}) => {
   const classes = useStyles();
   const [nameItem, setNameItem] = React.useState([]);
 
@@ -55,13 +61,12 @@ const MultipleSelect = ({ name, options, isSet, setOptions,  getDataFromServer})
       }
       return result;
     }, []);
-    const data = await getDataFromServer(idsValue.join(","));
-    console.log(data)
-    // let newData = []
-    // for (let i = 0; i < classes.length; i++) {
-    //   newClasses.push(classes[i].name || "");
-    // }
-    setOptions(data)
+    if (getDataFromServer) {
+      const data = await getDataFromServer(idsValue.join(","));
+      console.log(data);
+      setOptions(data);
+    }
+    setPostQuery(name.toLowerCase(), idsValue.join(","));
   };
 
   return (
@@ -92,4 +97,10 @@ const MultipleSelect = ({ name, options, isSet, setOptions,  getDataFromServer})
   );
 };
 
-export default MultipleSelect;
+export default compose(
+  inject(STORE_KEYS.VIEWMODESTORE),
+  observer,
+  withProps(({ [STORE_KEYS.VIEWMODESTORE]: { setPostQuery } }) => ({
+    setPostQuery
+  }))
+)(MultipleSelect);
