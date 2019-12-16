@@ -26,9 +26,7 @@ export const getFilterOptionsBuilding = ids =>
     // http://localhost:9202/adaptive/v1/research/filters?level=class&ids=635652,635570,619717
 
     .get(
-      ids
-        ? `http://localhost:9202/adaptive/v1/research/filters?level=building&ids=${ids}`
-        : `http://localhost:9202/adaptive/v1/research/filters?level=building`
+        `http://localhost:9202/adaptive/v1/research/filters?level=building&ids=${ids}`
     )
     .then(res => res.data || []);
 
@@ -41,9 +39,7 @@ export const getFilterOptionsClass = ids =>
     // http://localhost:9202/adaptive/v1/research/filters?level=class&ids=635652,635570,619717
 
     .get(
-      ids
-        ? `http://localhost:9202/adaptive/v1/research/filters?level=class&ids=${ids}`
-        : `http://localhost:9202/adaptive/v1/research/filters?level=class`
+        `http://localhost:9202/adaptive/v1/research/filters?level=class&ids=${ids}`
     )
     .then(res => res.data || []);
 

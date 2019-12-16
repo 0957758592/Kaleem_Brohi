@@ -22,31 +22,27 @@ class ViewModeStore {
   postQuery = {};
 
   constructor() {
-    // District
     getFilterOptionsDistrict().then(options => {
       let districts = [];
       for (let i = 0; i < options.length; i++) {
         this.optDistricts.push(options[i] || "");
       }
       this.isDsSet = true;
+      const buildings = options.map(item => item.id);
+      getFilterOptionsBuilding(buildings.join(",")).then(options => {
+        for (let i = 0; i < options.length; i++) {
+          this.optBuildings.push(options[i] || "");
+        }
+        this.isBdSet = true;
+        const classes = options.map(item => item.id);
+        getFilterOptionsClass(classes.join(",")).then(options => {
+          for (let i = 0; i < options.length; i++) {
+            this.optClasses.push(options[i] || "");
+          }
+          this.isClSet = true;
+        });
+      });
     });
-
-    // Building
-    getFilterOptionsBuilding().then(options => {
-      for (let i = 0; i < options.length; i++) {
-        this.optBuildings.push(options[i] || "");
-      }
-      this.isBdSet = true;
-    });
-
-    // class
-    getFilterOptionsClass().then(options => {
-      for (let i = 0; i < options.length; i++) {
-        this.optClasses.push(options[i] || "");
-      }
-      this.isClSet = true;
-    });
-
     // // student
     // getFilterOptions('student')
     //   .then(options => {
