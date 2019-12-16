@@ -19,6 +19,8 @@ class ViewModeStore {
   optStudents = [];
   isStSet = false;
 
+  postQuery = {};
+
   constructor() {
     // District
     getFilterOptionsDistrict().then(options => {
@@ -68,32 +70,17 @@ class ViewModeStore {
   setClassesOpt(value) {
     this.optClasses = [...value];
   }
-
-  getDownloadFile() {
-    getCSVFile("").then(data => {
-      console.log("csv:", data);
-      window.location.href = `https://s3.us-east-2.amazonaws.com/student-reports201911/${data}.csv`;
-    });
+  setPostQuery(name, value) {
+    this.postQuery = {
+      ...this.postQuery,
+      [name]: value
+    };
   }
 
-  // async getFilterOptionsClassBySelect(opt) {
-  //   this.optClasses = [];
-  //   this.state = "pending";
-  //   try {
-  //     const classes = await getFilterOptionsClass(opt.join(","));
-  //     console.log(classes);
-  //     runInAction(() => {
-  //       this.state = "done";
-  //       for (let i = 0; i < classes.length; i++) {
-  //         this.optClasses.push(options[i].name || "");
-  //       }
-  //     });
-  //   } catch (error) {
-  //     runInAction(() => {
-  //       this.state = "error";
-  //     });
-  //   }
-  // }
+  getDownloadFile(data) {
+    console.log("csv:", data);
+    window.location.href = `https://s3.us-east-2.amazonaws.com/student-reports201911/${data}.csv`;
+  }
 }
 
 decorate(ViewModeStore, {
@@ -105,10 +92,12 @@ decorate(ViewModeStore, {
   isClSet: observable,
   optStudents: observable,
   isStSet: observable,
+  postQuery: observable,
   getDownloadFile: action,
   setBuildingOpt: action.bound,
   setDistrictsOpt: action.bound,
   setClassesOpt: action.bound,
+  setPostQuery: action.bound
 });
 
 export default () => new ViewModeStore();
