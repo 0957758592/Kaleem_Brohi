@@ -8,23 +8,11 @@ const getHeaders = () => ({
 
 export const getFilterOptionsDistrict = () =>
   axios
-    // .get(`http://127.0.0.1:9202/search?level=${mode}`)
-
-    // http://localhost:9202/adaptive/v1/research/filters?level=district
-    // http://localhost:9202/adaptive/v1/research/filters?level=building&ids=635568,635504,619716,635650,635603,635586,619594
-    // http://localhost:9202/adaptive/v1/research/filters?level=class&ids=635652,635570,619717
-
     .get(`http://localhost:9202/adaptive/v1/research/filters?level=district`)
     .then(res => res.data || []);
 
 export const getFilterOptionsBuilding = ids =>
   axios
-    // .get(`http://127.0.0.1:9202/search?level=${mode}`)
-
-    // http://localhost:9202/adaptive/v1/research/filters?level=district
-    // http://localhost:9202/adaptive/v1/research/filters?level=building&ids=635568,635504,619716,635650,635603,635586,619594
-    // http://localhost:9202/adaptive/v1/research/filters?level=class&ids=635652,635570,619717
-
     .get(
         `http://localhost:9202/adaptive/v1/research/filters?level=building&ids=${ids}`
     )
@@ -32,12 +20,6 @@ export const getFilterOptionsBuilding = ids =>
 
 export const getFilterOptionsClass = ids =>
   axios
-    // .get(`http://127.0.0.1:9202/search?level=${mode}`)
-
-    // http://localhost:9202/adaptive/v1/research/filters?level=district
-    // http://localhost:9202/adaptive/v1/research/filters?level=building&ids=635568,635504,619716,635650,635603,635586,619594
-    // http://localhost:9202/adaptive/v1/research/filters?level=class&ids=635652,635570,619717
-
     .get(
         `http://localhost:9202/adaptive/v1/research/filters?level=class&ids=${ids}`
     )
@@ -56,6 +38,7 @@ export const getCSVFile = data =>
       }
     })
     .then(res => {
-      console.log("resp", res);
+      console.log("getCSVFile_resp", res);
+      console.log("getCSVFile_data", data);
       // res.data
     });

@@ -1,4 +1,5 @@
 import { decorate, observable, action, configure } from "mobx";
+import axios from "axios";
 import {
   getFilterOptionsBuilding,
   getFilterOptionsDistrict,
@@ -70,10 +71,29 @@ class ViewModeStore {
       [name]: value
     };
   }
+  
 
   getDownloadFile(data) {
     console.log("csv:", data);
-    window.location.href = `https://s3.us-east-2.amazonaws.com/student-reports201911/${data}.csv`;
+    axios
+      .get(`http://localhost:9201/adaptive/v1/research?${data}`, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Credentials": true
+        },
+
+        fetchOptions: {
+          mode: "cors"
+        }
+      })
+      .then(res => {
+        console.log("resp", res);
+        console.log("DATA_VueMode", data);
+        console.log("this.postQuery", this);
+        // res.data
+      });
+    // window.location.href = `https://s3.us-east-2.amazonaws.com/student-reports201911/${data}.csv`;
   }
 }
 
