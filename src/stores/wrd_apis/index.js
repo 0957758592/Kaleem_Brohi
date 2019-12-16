@@ -26,7 +26,9 @@ export const getFilterOptionsBuilding = ids =>
     // http://localhost:9202/adaptive/v1/research/filters?level=class&ids=635652,635570,619717
 
     .get(
-      `http://localhost:9202/adaptive/v1/research/filters?level=building&ids=${ids}`
+      ids
+        ? `http://localhost:9202/adaptive/v1/research/filters?level=building&ids=${ids}`
+        : `http://localhost:9202/adaptive/v1/research/filters?level=building`
     )
     .then(res => res.data || []);
 
@@ -39,7 +41,9 @@ export const getFilterOptionsClass = ids =>
     // http://localhost:9202/adaptive/v1/research/filters?level=class&ids=635652,635570,619717
 
     .get(
-      `http://localhost:9202/adaptive/v1/research/filters?level=class&ids=${ids}`
+      ids
+        ? `http://localhost:9202/adaptive/v1/research/filters?level=class&ids=${ids}`
+        : `http://localhost:9202/adaptive/v1/research/filters?level=class`
     )
     .then(res => res.data || []);
 
@@ -56,6 +60,6 @@ export const getCSVFile = data =>
       }
     })
     .then(res => {
-      console.log("resp", res)
+      console.log("resp", res);
       // res.data
-    } );
+    });
