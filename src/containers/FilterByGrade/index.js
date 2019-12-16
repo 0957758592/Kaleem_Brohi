@@ -32,7 +32,7 @@ export default function FilterByGrade() {
           value={age}
           onChange={handleChange}
         >
-          <MenuItem value={}></MenuItem>
+          <MenuItem value={''}> </MenuItem>
           <MenuItem value={10}>3</MenuItem>
           <MenuItem value={20}>4</MenuItem>
           <MenuItem value={30}>5</MenuItem>
