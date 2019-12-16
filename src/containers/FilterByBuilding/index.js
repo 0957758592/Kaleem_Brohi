@@ -1,90 +1,20 @@
-import React from 'react';
-import { compose, withProps } from 'recompose';
-import { inject, observer } from 'mobx-react';
-import { makeStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import ListItemText from '@material-ui/core/ListItemText';
-import Select from '@material-ui/core/Select';
-import Checkbox from '@material-ui/core/Checkbox';
+import React from "react";
+import { compose, withProps } from "recompose";
+import { inject, observer } from "mobx-react";
+import { getFilterOptionsClass } from "@/stores/wrd_apis";
+import MultipleSelect from "@/components/MultipleSelect";
 
-import { STORE_KEYS } from '@/stores';
+import { STORE_KEYS } from "@/stores";
 
-const useStyles = makeStyles(theme => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 200,
-    maxWidth: 300,
-  },
-  chips: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  chip: {
-    margin: 2,
-  },
-  noLabel: {
-    marginTop: theme.spacing(3),
-  },
-}));
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-
-const FilterByBuilding = ({ optBuildings, isBdSet }) => {
-  const classes = useStyles();
-  const [personName, setPersonName] = React.useState([]);
-
-  const handleChange = event => {
-    setPersonName(event.target.value);
-  };
-
+const FilterByBuilding = ({ optBuildings, isBdSet, setClassesOpt }) => {
   return (
-    <div>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-mutiple-checkbox-label">Data by Building</InputLabel>
-        <Select
-          labelId="demo-mutiple-checkbox-label"
-          id="demo-mutiple-checkbox"
-          multiple
-          value={personName}
-          onChange={handleChange}
-          input={<Input />}
-          renderValue={selected => selected.join(', ')}
-          MenuProps={MenuProps}
-        >
-          {optBuildings.map(name => (
-            <MenuItem key={name} value={name}>
-              <Checkbox checked={personName.indexOf(name) > -1} />
-              <ListItemText primary={name} />
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
+    <MultipleSelect
+      name="Building"
+      options={optBuildings}
+      isSet={isBdSet}
+      setOptions={setClassesOpt}
+      getDataFromServer={getFilterOptionsClass}
+    />
   );
 };
 
@@ -93,10 +23,11 @@ export default compose(
   observer,
   withProps(
     ({
-       [STORE_KEYS.VIEWMODESTORE]: { optBuildings, isBdSet },
-     }) => ({
+      [STORE_KEYS.VIEWMODESTORE]: { optBuildings, isBdSet, setClassesOpt }
+    }) => ({
       optBuildings,
       isBdSet,
+      setClassesOpt
     })
   )
 )(FilterByBuilding);
