@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { compose, withProps } from "recompose";
+import { inject, observer } from "mobx-react";
+import moment from "moment";
+import "react-dates/initialize";
+import "react-dates/lib/css/_datepicker.css";
 
-import 'react-dates/initialize';
-import 'react-dates/lib/css/_datepicker.css';
-
-import { DateRangePicker } from 'react-dates';
-
+import { DateRangePicker } from "react-dates";
+import { STORE_KEYS } from "@/stores";
 
 class FilterByDate extends Component {
   constructor(props) {
@@ -12,9 +14,21 @@ class FilterByDate extends Component {
     this.state = {
       startDate: null,
       endDate: null,
-      focusedInput: null,
+      focusedInput: null
     };
   }
+
+  handleChange = ({ startDate, endDate }) => {
+    const { setPostQuery } = this.props;
+    if (startDate && !endDate) {
+      this.setState({ startDate, endDate });
+      setPostQuery("fromdate", moment(startDate).valueOf())
+    }
+    if (endDate) {
+      this.setState({ endDate });
+      setPostQuery("todate", moment(endDate).valueOf())
+    }
+  };
 
   render() {
     return (
@@ -24,13 +38,21 @@ class FilterByDate extends Component {
           endDateId="endDate"
           startDate={this.state.startDate}
           endDate={this.state.endDate}
-          onDatesChange={({ startDate, endDate }) => { this.setState({ startDate, endDate })}}
+          onDatesChange={this.handleChange}
           focusedInput={this.state.focusedInput}
-          onFocusChange={(focusedInput) => { this.setState({ focusedInput })}}
+          onFocusChange={focusedInput => {
+            this.setState({ focusedInput });
+          }}
         />
       </div>
     );
   }
 }
 
-export default FilterByDate;
+export default compose(
+  inject(STORE_KEYS.VIEWMODESTORE),
+  observer,
+  withProps(({ [STORE_KEYS.VIEWMODESTORE]: { setPostQuery } }) => ({
+    setPostQuery
+  }))
+)(FilterByDate);
