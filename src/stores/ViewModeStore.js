@@ -75,25 +75,26 @@ class ViewModeStore {
 
   getDownloadFile(data) {
     console.log("csv:", data);
-    axios
-      .get(`http://localhost:9201/adaptive/v1/research?${data}`, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Credentials": true
-        },
+    // axios
+    //   .get(`http://localhost:9201/adaptive/v1/research?${data}`, {
+    //     headers: {
+    //       "Access-Control-Allow-Origin": "*",
+    //       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    //       "Access-Control-Allow-Credentials": true
+    //     },
 
-        fetchOptions: {
-          mode: "cors"
-        }
-      })
-      .then(res => {
-        console.log("resp", res);
-        console.log("DATA_VueMode", data);
-        console.log("this.postQuery", this);
-        // res.data
-      });
+    //     fetchOptions: {
+    //       mode: "cors"
+    //     }
+    //   })
+    //   .then(res => {
+    //     console.log("resp", res);
+    //     console.log("DATA_VueMode", data);
+    //     console.log("this.postQuery", this);
+    //     // res.data
+    //   });
     // window.location.href = `https://s3.us-east-2.amazonaws.com/student-reports201911/${data}.csv`;
+    window.location.href = `http://localhost:9201/adaptive/v1/research?${data}`;
   }
 }
 
