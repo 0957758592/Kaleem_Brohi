@@ -47,7 +47,9 @@ const MultipleSelect = ({
   isSet,
   setOptions,
   getDataFromServer,
-  setPostQuery
+  setPostQuery,
+  disabled,
+  setFlag
 }) => {
   const classes = useStyles();
   const [nameItem, setNameItem] = React.useState([]);
@@ -84,6 +86,7 @@ const MultipleSelect = ({
           input={<Input />}
           renderValue={selected => selected.join(", ")}
           MenuProps={MenuProps}
+          disabled={disabled}
         >
           {options.map(item => (
             <MenuItem key={item.name} value={item.name}>

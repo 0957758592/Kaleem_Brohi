@@ -22,6 +22,12 @@ class ViewModeStore {
 
   postQuery = {};
 
+  isGradeSelected = false;
+
+  isBuildingsSelected = false;
+
+  isDistrictSelected = false;
+
   constructor() {
     getFilterOptionsDistrict().then(options => {
       let districts = [];
@@ -53,6 +59,18 @@ class ViewModeStore {
     //     this.isStSet = true;
     //   });
   }
+
+  setIsGradeSelected = (value) => {
+    this.isGradeSelected = value;
+  };
+
+  setIsBuildingsSelected (value) {
+    this.isBuildingsSelected = value;
+  };
+
+  setIsDistrictSelected (value) {
+    this.isDistrictSelected = value;
+  };
 
   setDistrictsOpt(value) {
     this.optDistricts = [...value];
@@ -108,11 +126,17 @@ decorate(ViewModeStore, {
   optStudents: observable,
   isStSet: observable,
   postQuery: observable,
+  isDistrictSelected: observable,
+  isBuildingsSelected: observable,
+  isGradeSelected: observable,
   getDownloadFile: action,
   setBuildingOpt: action.bound,
   setDistrictsOpt: action.bound,
   setClassesOpt: action.bound,
-  setPostQuery: action.bound
+  setPostQuery: action.bound,
+  setIsBuildingsSelected: action.bound,
+  setIsDistrictSelected: action.bound,
+  setIsGradeSelected: action
 });
 
 export default () => new ViewModeStore();
