@@ -64,11 +64,11 @@ class ViewModeStore {
     this.isGradeSelected = value;
   };
 
-  setIsBuildingsSelected (value) {
+  setIsBuildingsSelected = (value) => {
     this.isBuildingsSelected = value;
   };
 
-  setIsDistrictSelected (value) {
+  setIsDistrictSelected = (value) => {
     this.isDistrictSelected = value;
   };
 
