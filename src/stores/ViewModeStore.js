@@ -28,6 +28,8 @@ class ViewModeStore {
 
   isDistrictSelected = false;
 
+  isClassSelected = false;
+
   constructor() {
     getFilterOptionsDistrict().then(options => {
       let districts = [];
@@ -70,6 +72,10 @@ class ViewModeStore {
 
   setIsDistrictSelected = (value) => {
     this.isDistrictSelected = value;
+  };
+
+  setIsClassSelected = (value) => {
+    this.isClassSelected = value;
   };
 
   setDistrictsOpt(value) {
