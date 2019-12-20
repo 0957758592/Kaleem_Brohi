@@ -6,7 +6,7 @@ import MultipleSelect from "@/components/MultipleSelect";
 
 import { STORE_KEYS } from "@/stores";
 
-const FilterByDistrict = ({ optDistricts, isDsSet, setBuildingOpt }) => {
+const FilterByDistrict = ({ optDistricts, isDsSet, setBuildingOpt, setIsDistrictSelected, isGradeSelected }) => {
   return (
     <MultipleSelect
       name="Districts"
@@ -14,6 +14,8 @@ const FilterByDistrict = ({ optDistricts, isDsSet, setBuildingOpt }) => {
       isSet={isDsSet}
       setOptions={setBuildingOpt}
       getDataFromServer={getFilterOptionsBuilding}
+      disabled={!isGradeSelected}
+      setFlag={setIsDistrictSelected}
     />
   );
 };
@@ -23,11 +25,13 @@ export default compose(
   observer,
   withProps(
     ({
-      [STORE_KEYS.VIEWMODESTORE]: { optDistricts, isDsSet, setBuildingOpt }
+      [STORE_KEYS.VIEWMODESTORE]: { optDistricts, isDsSet, setBuildingOpt, setIsDistrictSelected, isGradeSelected }
     }) => ({
       optDistricts,
       isDsSet,
-      setBuildingOpt
+      setBuildingOpt,
+      setIsDistrictSelected,
+      isGradeSelected
     })
   )
 )(FilterByDistrict);

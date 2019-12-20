@@ -18,11 +18,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function SelectItem({ name, options, setPostQuery }) {
+function SelectItem({ name, options, setPostQuery, setFlag }) {
   const classes = useStyles();
   const [value, setValue] = React.useState("");
   const handleChange = e => {
     setValue(e.target.value);
+    if (name === "Grade" && e.target.value) {
+        setFlag(true);
+    }
     setPostQuery(name.toLowerCase(), e.target.value);
   };
 
