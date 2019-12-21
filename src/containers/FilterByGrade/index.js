@@ -1,5 +1,8 @@
 import React from "react";
+import {compose, withProps} from "recompose";
+import {inject, observer} from "mobx-react";
 import SelectItem from "@/components/Select";
+import { STORE_KEYS } from "@/stores";
 
 const grade = [
   { name: " " },
@@ -11,6 +14,13 @@ const grade = [
   { name: 8 }
 ];
 
-export default function FilterByGrade() {
-  return <SelectItem name="Grade" options={grade} />;
+function FilterByGrade({ setIsGradeSelected }) {
+  return <SelectItem name="Grade" options={grade} setFlag={setIsGradeSelected} />;
 }
+export default compose(
+    inject(STORE_KEYS.VIEWMODESTORE),
+    observer,
+    withProps(({ [STORE_KEYS.VIEWMODESTORE]: { setIsGradeSelected } }) => ({
+      setIsGradeSelected
+    }))
+)(FilterByGrade);

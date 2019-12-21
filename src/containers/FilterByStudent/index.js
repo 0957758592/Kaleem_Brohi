@@ -75,6 +75,7 @@ const FilterByStudent = ({ optStudents, isStSet }) => {
           input={<Input />}
           renderValue={selected => selected.join(', ')}
           MenuProps={MenuProps}
+          disabled
         >
           {optStudents.map(name => (
             <MenuItem key={name} value={name}>

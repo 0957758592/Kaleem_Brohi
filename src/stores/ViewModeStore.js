@@ -22,6 +22,14 @@ class ViewModeStore {
 
   postQuery = {};
 
+  isGradeSelected = false;
+
+  isBuildingsSelected = false;
+
+  isDistrictSelected = false;
+
+  isClassSelected = false;
+
   constructor() {
     getFilterOptionsDistrict().then(options => {
       let districts = [];
@@ -54,9 +62,32 @@ class ViewModeStore {
     //   });
   }
 
+  setIsGradeSelected = (value) => {
+    this.isGradeSelected = value;
+  };
+
+  setIsBuildingsSelected = (value) => {
+    this.isBuildingsSelected = value;
+  };
+
+  setIsDistrictSelected = (value) => {
+    this.isDistrictSelected = value;
+  };
+
+  setIsClassSelected = (value) => {
+    this.isClassSelected = value;
+  };
+
   setDistrictsOpt(value) {
     this.optDistricts = [...value];
   }
+  setPostQuery(name, value) {
+    this.postQuery = {
+      ...this.postQuery,
+      [name]: value
+    };
+  }
+  
 
   setBuildingOpt(value) {
     this.optBuildings = [...value];
@@ -75,26 +106,26 @@ class ViewModeStore {
 
   getDownloadFile(data) {
     console.log("csv:", data);
-    // axios
-    //   .get(`http://localhost:9201/adaptive/v1/research?${data}`, {
-    //     headers: {
-    //       "Access-Control-Allow-Origin": "*",
-    //       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-    //       "Access-Control-Allow-Credentials": true
-    //     },
+    axios
+      .get(`http://localhost:9201/adaptive/v1/research?${data}`, {
+        //     headers: {
+        //       "Access-Control-Allow-Origin": "*",
+        //       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        //       "Access-Control-Allow-Credentials": true
+        //     },
 
-    //     fetchOptions: {
-    //       mode: "cors"
-    //     }
-    //   })
-    //   .then(res => {
-    //     console.log("resp", res);
-    //     console.log("DATA_VueMode", data);
-    //     console.log("this.postQuery", this);
-    //     // res.data
-    //   });
+        //     fetchOptions: {
+        //       mode: "cors"
+        //     }
+        //   })
+        //   .then(res => {
+        //     console.log("resp", res);
+        //     console.log("DATA_VueMode", data);
+        //     console.log("this.postQuery", this);
+        //     // res.data
+      }).then(res => console.log(res));
     // window.location.href = `https://s3.us-east-2.amazonaws.com/student-reports201911/${data}.csv`;
-    window.location.href = `http://localhost:9201/adaptive/v1/research?${data}`;
+    // window.location.href = `http://localhost:9201/adaptive/v1/research?${data}`;
   }
 }
 
@@ -108,11 +139,17 @@ decorate(ViewModeStore, {
   optStudents: observable,
   isStSet: observable,
   postQuery: observable,
+  isDistrictSelected: observable,
+  isBuildingsSelected: observable,
+  isGradeSelected: observable,
   getDownloadFile: action,
   setBuildingOpt: action.bound,
   setDistrictsOpt: action.bound,
   setClassesOpt: action.bound,
-  setPostQuery: action.bound
+  setPostQuery: action.bound,
+  setIsBuildingsSelected: action.bound,
+  setIsDistrictSelected: action.bound,
+  setIsGradeSelected: action
 });
 
 export default () => new ViewModeStore();
