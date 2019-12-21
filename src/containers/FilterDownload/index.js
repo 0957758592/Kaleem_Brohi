@@ -31,24 +31,10 @@ const FilterDownload = ({ getDownloadFile, postQuery }) => {
     }
     console.log("QUERY", query)
     // getCSVFile().then(query => {
-      setIsLoading(true);
-      await delay(15);
-      getDownloadFile(query);
-      setIsLoading(false)
-    // });
-
-  };
-
-  const handleDownload = async () => {
-    let query = "";
-    for (let [key, value] of Object.entries(postQuery)) {
-      query = query
-        ? query.concat("", `&${key}=${value}`)
-        : query.concat("", `${key}=${value}`);
-    }
-    console.log("QUERY", query)
-    // getCSVFile().then(query => {
-      getDownloadFile(query);
+    setIsLoading(true);
+    getDownloadFile(query);
+    await delay(11);
+    setIsLoading(false)
     // });
 
   };
