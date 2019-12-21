@@ -32,8 +32,8 @@ const FilterDownload = ({ getDownloadFile, postQuery }) => {
     console.log("QUERY", query)
     // getCSVFile().then(query => {
     setIsLoading(true);
-    getDownloadFile(query);
     await delay(11);
+    getDownloadFile(query);
     setIsLoading(false)
     // });
 
