@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import Typography from '@material-ui/core/Typography';
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 function rand() {
@@ -29,7 +28,6 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(2, 4, 3),
     },
 }));
-const delay = (s) => new Promise(resolve => setTimeout(resolve, s * 1000));
 
 export default function DownloadedModal({open}) {
     const classes = useStyles();
@@ -83,7 +81,6 @@ export default function DownloadedModal({open}) {
                     <p id="simple-modal-description">
                         System is working on your request...
                     </p>
-                    <DownloadedModal />
                      <div style={{height: 20}}>{fadeText === "" ? (<LinearProgress  variant="query" color="primary" />) : fadeText }</div>
 
                 </div>
