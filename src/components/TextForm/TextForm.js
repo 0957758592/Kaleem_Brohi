@@ -21,8 +21,6 @@ function TextForm({name, setPostQuery}) {
     const [value, setValue] = React.useState("");
     const handleChange = e => {
         setValue(e.target.value);
-        console.log(value);
-        console.log(name);
         setPostQuery(name.toLowerCase(), e.target.value);
     };
     return (
