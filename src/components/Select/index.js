@@ -23,8 +23,10 @@ function SelectItem({ name, options, setPostQuery, setFlag }) {
   const [value, setValue] = React.useState("");
   const handleChange = e => {
     setValue(e.target.value);
-    if (name === "Grade" && e.target.value) {
+    if (name === "Grade" && e.target.value !== " ") {
         setFlag(true);
+    } else {
+        setFlag(false);
     }
     setPostQuery(name.toLowerCase(), e.target.value);
   };

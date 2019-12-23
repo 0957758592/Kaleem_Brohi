@@ -66,7 +66,7 @@ const MultipleSelect = ({
     if (getDataFromServer) {
       const data = await getDataFromServer(idsValue.join(","));
       setOptions(data);
-      setFlag(true);
+      value.length ? setFlag(true) : setFlag(false);
     }
     setPostQuery(name.toLowerCase(), idsValue.join(","));
   };
