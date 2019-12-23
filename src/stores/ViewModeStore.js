@@ -113,7 +113,7 @@ class ViewModeStore {
       })
       .catch(err => { console.log(err) })
       .finally(() => {
-        if (res) window.location.href = `${URL}${data}`;
+        window.location.href = `${URL}${data}`;
         setIsLoading(true);
       })
   }
