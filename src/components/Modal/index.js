@@ -36,7 +36,7 @@ export default function DownloadedModal({open}) {
     // getModalStyle is not a pure function, we roll the style only on the first render
     const [modalStyle] = React.useState(getModalStyle);
     let fadeText = "";
-    const [additionalText, setAdditionalText] = useState('')
+    // const [additionalText, setAdditionalText] = useState('')
     const [count, setCount] = useState(0);
 
     const interval = useInterval(() => {
@@ -61,22 +61,14 @@ export default function DownloadedModal({open}) {
 
      count % 5 === 0 ? fadeText = ("Preparing the CSV file") : fadeText = ("");
 
-    // const [open, setOpen] = React.useState(false);
-    //
-    // const handleOpen = () => {
-    //     setOpen(true);
-    // };
-    //
-    // const handleClose = () => {
-    //     setOpen(false);
-    // };
+    const [openModal, setOpen] = React.useState(false);
 
     return (
         <div>
             <Modal
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
-                open={open}
+                open={openModal}
                 // onClose={handleClose}
             >
                 <div style={modalStyle} className={classes.paper}>

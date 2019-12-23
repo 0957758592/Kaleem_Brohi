@@ -53,13 +53,13 @@ class ViewModeStore {
       });
     });
     // student
-    getFilterOptions('student')
-      .then(options => {
-        for (let i = 0; i < options.length; i++) {
-          this.optStudents.push(options[i].name || '');
-        }
-        this.isStSet = true;
-      });
+    // getFilterOptionsStudent('student')
+    //   .then(options => {
+    //     for (let i = 0; i < options.length; i++) {
+    //       this.optStudents.push(options[i].name || '');
+    //     }
+    //     this.isStSet = true;
+    //   });
   }
 
   setIsGradeSelected = (value) => {
@@ -103,9 +103,19 @@ class ViewModeStore {
     };
   }
   
-
-  getDownloadFile(data) {
-    window.location.href = `http://localhost:9201/adaptive/v1/research?${data}`;
+  getDownloadFile(data, setIsLoading) {
+    const URL = "http://localhost:9201/adaptive/v1/research?"
+    axios.get(`${URL}${data}`).then((res) => {
+      console.log(res)
+    })
+      .then((data) => {
+        console.log(data)
+      })
+      .catch(err => { console.log(err) })
+      .finally(() => {
+        if (res) window.location.href = `${URL}${data}`;
+        setIsLoading(true);
+      })
   }
 }
 

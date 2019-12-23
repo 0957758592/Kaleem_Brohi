@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 const FilterDownload = ({ getDownloadFile, postQuery }) => {
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
-  const delay = (s) => new Promise(resolve => setTimeout(resolve, s * 1000));
+  //const delay = (s) => new Promise(resolve => setTimeout(resolve, s * 1000));
   const handleDownload = async () => {
     let query = "";
     for (let [key, value] of Object.entries(postQuery)) {
@@ -29,14 +29,9 @@ const FilterDownload = ({ getDownloadFile, postQuery }) => {
         ? query.concat("", `&${key}=${value}`)
         : query.concat("", `${key}=${value}`);
     }
-    console.log("QUERY", query)
-    // getCSVFile().then(query => {
-    setIsLoading(true);
-    await delay(11);
-    getDownloadFile(query);
-    setIsLoading(false)
-    // });
-
+    // setIsLoading(true);
+    await getDownloadFile(query, setIsLoading);
+    console.log(query);
   };
 
   return (

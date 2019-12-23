@@ -3,8 +3,8 @@ import SelectItem from "@/components/Select";
 
 const test = [
   { name: "All" },
-  { name: "Math" },
-  { name: "Reading" },
+  { name: "M" },
+  { name: "R" },
 ];
 
 export default function FilterByTest() {
