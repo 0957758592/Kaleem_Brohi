@@ -52,8 +52,8 @@ class ViewModeStore {
         });
       });
     });
-    // // student
-    // getFilterOptions('student')
+    // student
+    // getFilterOptionsStudent('student')
     //   .then(options => {
     //     for (let i = 0; i < options.length; i++) {
     //       this.optStudents.push(options[i].name || '');
@@ -81,6 +81,13 @@ class ViewModeStore {
   setDistrictsOpt(value) {
     this.optDistricts = [...value];
   }
+  setPostQuery(name, value) {
+    this.postQuery = {
+      ...this.postQuery,
+      [name]: value
+    };
+  }
+  
 
   setBuildingOpt(value) {
     this.optBuildings = [...value];
@@ -96,29 +103,19 @@ class ViewModeStore {
     };
   }
   
-
-  getDownloadFile(data) {
-    console.log("csv:", data);
-    // axios
-    //   .get(`http://localhost:9201/adaptive/v1/research?${data}`, {
-    //     headers: {
-    //       "Access-Control-Allow-Origin": "*",
-    //       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-    //       "Access-Control-Allow-Credentials": true
-    //     },
-
-    //     fetchOptions: {
-    //       mode: "cors"
-    //     }
-    //   })
-    //   .then(res => {
-    //     console.log("resp", res);
-    //     console.log("DATA_VueMode", data);
-    //     console.log("this.postQuery", this);
-    //     // res.data
-    //   });
-    // window.location.href = `https://s3.us-east-2.amazonaws.com/student-reports201911/${data}.csv`;
-    window.location.href = `http://localhost:9201/adaptive/v1/research?${data}`;
+  getDownloadFile(data, setIsLoading) {
+    const URL = "http://localhost:9201/adaptive/v1/research?"
+    axios.get(`${URL}${data}`).then((res) => {
+      console.log(res)
+    })
+      .then((data) => {
+        console.log(data)
+      })
+      .catch(err => { console.log(err) })
+      .finally(() => {
+        window.location.href = `${URL}${data}`;
+        setIsLoading(true);
+      })
   }
 }
 
