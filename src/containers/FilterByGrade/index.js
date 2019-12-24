@@ -15,11 +15,6 @@ const grade = [
 ];
 
 function FilterByGrade({ setIsGradeSelected, isGradeSelected, setDistrictsOpt }) {
-    useEffect(() => {
-        if(!isGradeSelected) {
-            setDistrictsOpt([]);
-        }
-    }, [isGradeSelected]);
   return <SelectItem name="Grade" options={grade} setFlag={setIsGradeSelected} />;
 }
 export default compose(

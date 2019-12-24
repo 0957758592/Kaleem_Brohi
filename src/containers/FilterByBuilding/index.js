@@ -18,6 +18,7 @@ const FilterByBuilding = ({
         if(!isDistrictSelected) {
             setBuildingOpt([]);
             setClassesOpt([]);
+            setIsBuildingsSelected(false);
         }
     }, [isDistrictSelected]);
   return (

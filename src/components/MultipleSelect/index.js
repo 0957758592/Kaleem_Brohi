@@ -53,10 +53,10 @@ const MultipleSelect = ({
   const classes = useStyles();
   const [nameItem, setNameItem] = React.useState([]);
   useEffect(() => {
-    if(!options.length) {
+    if(!options.length || disabled) {
       setNameItem([]);
     }
-  },[options])
+  },[options, disabled]);
   const handleChange = async e => {
     const value = e.target.value;
     setNameItem(value);

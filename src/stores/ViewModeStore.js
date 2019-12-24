@@ -114,7 +114,7 @@ class ViewModeStore {
       .catch(err => { console.log(err) })
       .finally(() => {
         window.location.href = `${URL}${data}`;
-        setIsLoading(true);
+        // setIsLoading(true);
       })
   }
 }
