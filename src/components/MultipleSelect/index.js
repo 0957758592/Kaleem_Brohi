@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { compose, withProps } from "recompose";
 import { inject, observer } from "mobx-react";
 import { makeStyles } from "@material-ui/core/styles";
@@ -52,7 +52,11 @@ const MultipleSelect = ({
 }) => {
   const classes = useStyles();
   const [nameItem, setNameItem] = React.useState([]);
-
+  useEffect(() => {
+    if(!options.length) {
+      setNameItem([]);
+    }
+  },[options])
   const handleChange = async e => {
     const value = e.target.value;
     setNameItem(value);
@@ -73,12 +77,12 @@ const MultipleSelect = ({
   return (
     <div>
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-mutiple-checkbox-label">
+        <InputLabel id={`mutiple-checkbox-label-${name}`}>
           {`Data by ${name}`}
         </InputLabel>
         <Select
-          labelId="demo-mutiple-checkbox-label"
-          id="demo-mutiple-checkbox"
+          labelId={`mutiple-checkbox-label-${name}`}
+          id={`mutiple-checkbox-${name}`}
           multiple
           value={nameItem}
           onChange={handleChange}

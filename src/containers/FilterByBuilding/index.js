@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { compose, withProps } from "recompose";
 import { inject, observer } from "mobx-react";
 import { getFilterOptionsClass } from "@/stores/wrd_apis";
@@ -6,7 +6,19 @@ import MultipleSelect from "@/components/MultipleSelect";
 
 import { STORE_KEYS } from "@/stores";
 
-const FilterByBuilding = ({ optBuildings, isBdSet, setClassesOpt, setIsBuildingsSelected, isDistrictSelected }) => {
+const FilterByBuilding = ({
+  optBuildings,
+  isBdSet,
+  setClassesOpt,
+  setIsBuildingsSelected,
+  isDistrictSelected,
+  setBuildingOpt
+}) => {
+    useEffect(() => {
+        if(!isDistrictSelected) {
+            setBuildingOpt([]);
+        }
+    }, [isDistrictSelected]);
   return (
     <MultipleSelect
       name="Building"
@@ -25,13 +37,21 @@ export default compose(
   observer,
   withProps(
     ({
-      [STORE_KEYS.VIEWMODESTORE]: { optBuildings, isBdSet, setClassesOpt, setIsBuildingsSelected, isDistrictSelected }
+      [STORE_KEYS.VIEWMODESTORE]: {
+        optBuildings,
+        isBdSet,
+        setClassesOpt,
+        setIsBuildingsSelected,
+        isDistrictSelected,
+        setBuildingOpt
+      }
     }) => ({
       optBuildings,
       isBdSet,
       setClassesOpt,
       setIsBuildingsSelected,
-      isDistrictSelected
+      isDistrictSelected,
+      setBuildingOpt
     })
   )
 )(FilterByBuilding);
