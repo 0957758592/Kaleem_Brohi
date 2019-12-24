@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {compose, withProps} from "recompose";
 import {inject, observer} from "mobx-react";
 import SelectItem from "@/components/Select";
@@ -14,13 +14,20 @@ const grade = [
   { name: 8 }
 ];
 
-function FilterByGrade({ setIsGradeSelected }) {
+function FilterByGrade({ setIsGradeSelected, isGradeSelected, setDistrictsOpt }) {
+    useEffect(() => {
+        if(!isGradeSelected) {
+            setDistrictsOpt([]);
+        }
+    }, [isGradeSelected]);
   return <SelectItem name="Grade" options={grade} setFlag={setIsGradeSelected} />;
 }
 export default compose(
     inject(STORE_KEYS.VIEWMODESTORE),
     observer,
-    withProps(({ [STORE_KEYS.VIEWMODESTORE]: { setIsGradeSelected } }) => ({
-      setIsGradeSelected
+    withProps(({ [STORE_KEYS.VIEWMODESTORE]: { setIsGradeSelected, isGradeSelected, setDistrictsOpt } }) => ({
+      setIsGradeSelected,
+        isGradeSelected,
+        setDistrictsOpt
     }))
 )(FilterByGrade);

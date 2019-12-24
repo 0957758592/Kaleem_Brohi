@@ -25,12 +25,9 @@ function SelectItem({ name, options, setPostQuery, setFlag }) {
     setValue(e.target.value);
     if (name === "Grade" && e.target.value !== " ") {
         setFlag(true);
-    } else if (e.target.value === " ") {
-        setFlag(false);
     }
     setPostQuery(name.toLowerCase(), e.target.value);
   };
-
   return (
     <div>
       <FormControl className={classes.formControl}>
