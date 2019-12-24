@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 
 import { STORE_KEYS } from "@/stores";
+import Select from "@material-ui/core/Select";
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -30,6 +31,7 @@ function TextForm({ name, setPostQuery }) {
         value={value}
         id={name}
         label={`Data by ${name}`}
+        inputProps={{style: { textAlign: 'center', paddingRight: 24 }}}
       />
     </FormControl>
   );
