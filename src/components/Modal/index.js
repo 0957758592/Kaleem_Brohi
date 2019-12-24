@@ -61,23 +61,19 @@ export default function DownloadedModal({open}) {
 
      count % 5 === 0 ? fadeText = ("Preparing the CSV file") : fadeText = ("");
 
-    const [openModal, setOpen] = React.useState(false);
-
     return (
         <div>
             <Modal
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
-                open={openModal}
+                open={open}
                 // onClose={handleClose}
             >
                 <div style={modalStyle} className={classes.paper}>
                     <p id="simple-modal-description">
                         System is working on your request...
                     </p>
-                    <DownloadedModal />
                      <div style={{height: 20}}>{fadeText === "" ? (<LinearProgress  variant="query" color="primary" />) : fadeText }</div>
-
                 </div>
             </Modal>
         </div>
