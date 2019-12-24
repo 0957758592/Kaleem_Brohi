@@ -17,6 +17,7 @@ const FilterByBuilding = ({
     useEffect(() => {
         if(!isDistrictSelected) {
             setBuildingOpt([]);
+            setClassesOpt([]);
         }
     }, [isDistrictSelected]);
   return (
