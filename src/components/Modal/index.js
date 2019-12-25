@@ -4,13 +4,9 @@ import Modal from "@material-ui/core/Modal";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import PropTypes from "prop-types";
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50;
+  const left = 50;
 
   return {
     top: `${top}%`,
@@ -26,8 +22,13 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3)
-  }
+    padding: theme.spacing(2, 4, 3),
+        [theme.breakpoints.between("xs", "sm")]: {
+        fontSize: "1.4em",
+        width: 350,
+        padding: "16px 20px 24px"
+        },
+},
 }));
 
 export default function DownloadedModal({ open }) {

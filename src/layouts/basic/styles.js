@@ -1,8 +1,11 @@
 import styled from 'styled-components/macro';
 
 export const Wrapper = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
+    display: flex;
+    align-items: center;
+    align-content: space-between;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
 `;

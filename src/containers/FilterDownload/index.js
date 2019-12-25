@@ -13,8 +13,22 @@ const useStyles = makeStyles(theme => ({
     "& > *": {
       margin: theme.spacing(1),
       width: "100%",
-      height: 50
+      height: 50,
     }
+  },
+  button: {
+    letterSpacing: "2px",
+    transition: ".3s ease",
+    border: "1px solid #fff",
+    fontWeight: 700,
+    "&:hover": {
+      transform: "scaleX(1.1)",
+      transition: ".3s ease",
+      backgroundColor: "transparent",
+      color: "#fff",
+      border: "1px solid #fff",
+},
+
   }
 }));
 
@@ -39,7 +53,7 @@ const FilterDownload = ({ getDownloadFile, postQuery }) => {
 
   return (
     <div className={classes.root}>
-      <Button type="submit" variant="contained" onClick={handleDownload}>
+      <Button className={classes.button} type="submit" variant="contained" onClick={handleDownload}>
         Download
       </Button>
       <DownloadedModal open={isLoading} />
