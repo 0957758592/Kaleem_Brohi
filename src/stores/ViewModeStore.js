@@ -1,10 +1,15 @@
-import { decorate, observable, action, configure } from "mobx";
+import {
+  decorate,
+  observable,
+  action,
+  // configure
+} from "mobx";
 import axios from "axios";
 import {
   getFilterOptionsBuilding,
   getFilterOptionsDistrict,
   getFilterOptionsClass,
-  getCSVFile
+  // getCSVFile
 } from "@/stores/wrd_apis";
 
 class ViewModeStore {
@@ -32,7 +37,6 @@ class ViewModeStore {
 
   constructor() {
     getFilterOptionsDistrict().then(options => {
-      let districts = [];
       for (let i = 0; i < options.length; i++) {
         this.optDistricts.push(options[i] || "");
       }

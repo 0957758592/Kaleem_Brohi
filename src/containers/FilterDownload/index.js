@@ -4,7 +4,6 @@ import { inject, observer } from "mobx-react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import DownloadedModal from "../../components/Modal";
-import { getCSVFile } from "@/stores/wrd_apis";
 
 import { STORE_KEYS } from "@/stores";
 import PropTypes from "prop-types";

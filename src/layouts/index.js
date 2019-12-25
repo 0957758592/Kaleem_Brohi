@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import { STORE_KEYS } from '../stores';
-
 import BasicView from '@/layouts/basic';
 import { Wrapper } from './styles';
 

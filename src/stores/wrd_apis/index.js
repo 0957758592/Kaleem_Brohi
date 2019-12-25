@@ -1,11 +1,5 @@
 import axios from "axios";
 
-const getHeaders = () => ({
-  headers: {
-    "Content-Type": "application/json"
-  }
-});
-
 export const getFilterOptionsDistrict = () =>
   axios
     .get(`http://localhost:9202/adaptive/v1/research/filters?level=district`)
