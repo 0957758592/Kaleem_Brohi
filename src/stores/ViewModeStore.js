@@ -81,13 +81,6 @@ class ViewModeStore {
   setDistrictsOpt(value) {
     this.optDistricts = [...value];
   }
-  setPostQuery(name, value) {
-    this.postQuery = {
-      ...this.postQuery,
-      [name]: value
-    };
-  }
-  
 
   setBuildingOpt(value) {
     this.optBuildings = [...value];
@@ -96,6 +89,7 @@ class ViewModeStore {
   setClassesOpt(value) {
     this.optClasses = [...value];
   }
+
   setPostQuery(name, value) {
     this.postQuery = {
       ...this.postQuery,

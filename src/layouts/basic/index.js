@@ -1,5 +1,4 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
 import { makeStyles } from '@material-ui/core/styles';
 
 import FilterByDate from "@/containers/FilterByDate";
@@ -25,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: "1em",
     [theme.breakpoints.between('xs', 'sm')]: {
       minWidth: "70%",
-      maxWidth: "80%",
+      maxWidth: "95%",
     },
     [theme.breakpoints.between('md', 'lg')]: {
       minWidth: "50%",
@@ -47,8 +46,6 @@ export default () => {
   return (
     <Wrapper>
       <div className={classes.root}>
-      {/*<Grid container alignItems="center" justify="center">*/}
-      {/*  <Grid item xl={3} lg={3} md={6} sm={9} xs={10}>*/}
           <h1>Research Data</h1>
           <FilterByDate />
           <FilterByTest />
@@ -61,8 +58,6 @@ export default () => {
           <div className={classes.button}>
           <FilterDownload />
           </div>
-      {/*  </Grid>{" "}*/}
-      {/*</Grid>*/}
       </div>
     </Wrapper>
   );
