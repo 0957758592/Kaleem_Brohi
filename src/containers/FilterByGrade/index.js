@@ -1,8 +1,9 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {compose, withProps} from "recompose";
 import {inject, observer} from "mobx-react";
 import SelectItem from "@/components/Select";
 import { STORE_KEYS } from "@/stores";
+import PropTypes from "prop-types";
 
 const grade = [
   { name: " " },
@@ -21,8 +22,14 @@ export default compose(
     inject(STORE_KEYS.VIEWMODESTORE),
     observer,
     withProps(({ [STORE_KEYS.VIEWMODESTORE]: { setIsGradeSelected, isGradeSelected, setDistrictsOpt } }) => ({
-      setIsGradeSelected,
+        setIsGradeSelected,
         isGradeSelected,
         setDistrictsOpt
     }))
 )(FilterByGrade);
+
+FilterByGrade.propTypes = {
+  setIsGradeSelected: PropTypes.func.isRequired,
+  isGradeSelected: PropTypes.bool.isRequired,
+  setDistrictsOpt: PropTypes.func.isRequired
+};

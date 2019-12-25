@@ -7,6 +7,7 @@ import DownloadedModal from "../../components/Modal";
 import { getCSVFile } from "@/stores/wrd_apis";
 
 import { STORE_KEYS } from "@/stores";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -57,3 +58,8 @@ export default compose(
     })
   )
 )(FilterDownload);
+
+FilterDownload.propTypes = {
+  getDownloadFile: PropTypes.func.isRequired,
+  postQuery: PropTypes.object.isRequired
+};

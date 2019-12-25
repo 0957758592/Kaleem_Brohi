@@ -6,7 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 
 import { STORE_KEYS } from "@/stores";
-import Select from "@material-ui/core/Select";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -44,3 +44,9 @@ export default compose(
     setPostQuery
   }))
 )(TextForm);
+
+
+TextForm.propTypes = {
+  name: PropTypes.string.isRequired,
+  setPostQuery: PropTypes.func.isRequired,
+};

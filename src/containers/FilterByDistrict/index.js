@@ -5,6 +5,7 @@ import { getFilterOptionsBuilding } from "@/stores/wrd_apis";
 import MultipleSelect from "@/components/MultipleSelect";
 
 import { STORE_KEYS } from "@/stores";
+import PropTypes from "prop-types";
 
 const FilterByDistrict = ({ optDistricts, isDsSet, setBuildingOpt, setIsDistrictSelected, isGradeSelected }) => {
   return (
@@ -35,3 +36,11 @@ export default compose(
     })
   )
 )(FilterByDistrict);
+
+FilterByDistrict.propTypes = {
+    optDistricts: PropTypes.array.isRequired,
+    isDsSet: PropTypes.bool.isRequired,
+    setBuildingOpt: PropTypes.func.isRequired,
+    setIsDistrictSelected: PropTypes.func.isRequired,
+    isGradeSelected: PropTypes.bool.isRequired
+};

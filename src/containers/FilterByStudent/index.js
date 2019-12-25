@@ -11,6 +11,7 @@ import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 
 import { STORE_KEYS } from '@/stores';
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -100,3 +101,8 @@ export default compose(
     })
   )
 )(FilterByStudent);
+
+FilterByStudent.propTypes = {
+  optStudents: PropTypes.array.isRequired,
+  isStSet: PropTypes.bool.isRequired,
+};

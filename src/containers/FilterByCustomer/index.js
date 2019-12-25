@@ -4,6 +4,7 @@ import {inject, observer} from "mobx-react";
 import TextForm from "@/components/TextForm/TextForm";
 
 import { STORE_KEYS } from "@/stores";
+import PropTypes from "prop-types";
 
 function FilterByCustomer({name, setPostQuery}) {
 
@@ -24,3 +25,7 @@ export default compose(
       setPostQuery
     }))
 )(FilterByCustomer);
+
+FilterByCustomer.propTypes = {
+    setPostQuery: PropTypes.func.isRequired
+};

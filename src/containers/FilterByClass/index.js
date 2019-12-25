@@ -4,6 +4,7 @@ import { inject, observer } from "mobx-react";
 import MultipleSelect from "@/components/MultipleSelect";
 
 import { STORE_KEYS } from "@/stores";
+import PropTypes from "prop-types";
 
 const FilterByClass = ({
   optClasses,
@@ -13,13 +14,13 @@ const FilterByClass = ({
   setClassesOpt,
   isDistrictSelected
 }) => {
-  {
-    useEffect(() => {
-      if (!isBuildingsSelected) {
-        setClassesOpt([]);
-      }
-    }, [isBuildingsSelected]);
-  }
+
+  useEffect(() => {
+    if (!isBuildingsSelected) {
+      setClassesOpt([]);
+    }
+  }, [isBuildingsSelected, setClassesOpt]);
+
   return (
     <MultipleSelect
       name="Class"
@@ -56,3 +57,12 @@ export default compose(
     })
   )
 )(FilterByClass);
+
+FilterByClass.propTypes = {
+  optClasses: PropTypes.array.isRequired,
+  isClSet: PropTypes.bool.isRequired,
+  isBuildingsSelected: PropTypes.bool.isRequired,
+  setIsClassSelected: PropTypes.func.isRequired,
+  setClassesOpt: PropTypes.func.isRequired,
+  isDistrictSelected: PropTypes.bool.isRequired
+};

@@ -7,6 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { STORE_KEYS } from "@/stores";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -60,3 +61,10 @@ export default compose(
     setPostQuery
   }))
 )(SelectItem);
+
+SelectItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  options: PropTypes.array.isRequired,
+  setPostQuery: PropTypes.func.isRequired,
+  setFlag: PropTypes.func.isRequired
+};

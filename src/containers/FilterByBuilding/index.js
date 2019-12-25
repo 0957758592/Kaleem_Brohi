@@ -5,6 +5,7 @@ import { getFilterOptionsClass } from "@/stores/wrd_apis";
 import MultipleSelect from "@/components/MultipleSelect";
 
 import { STORE_KEYS } from "@/stores";
+import PropTypes from 'prop-types';
 
 const FilterByBuilding = ({
   optBuildings,
@@ -20,7 +21,7 @@ const FilterByBuilding = ({
             setClassesOpt([]);
             setIsBuildingsSelected(false);
         }
-    }, [isDistrictSelected]);
+    }, [isDistrictSelected, setBuildingOpt, setClassesOpt, setIsBuildingsSelected]);
   return (
     <MultipleSelect
       name="Building"
@@ -57,3 +58,12 @@ export default compose(
     })
   )
 )(FilterByBuilding);
+
+FilterByBuilding.propTypes = {
+    optBuildings: PropTypes.array.isRequired,
+    isBdSet: PropTypes.bool.isRequired,
+    setClassesOpt: PropTypes.func.isRequired,
+    setIsBuildingsSelected: PropTypes.func.isRequired,
+    isDistrictSelected: PropTypes.bool.isRequired,
+    setBuildingOpt: PropTypes.func.isRequired
+};

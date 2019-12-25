@@ -7,6 +7,7 @@ import "react-dates/lib/css/_datepicker.css";
 
 import { DateRangePicker } from "react-dates";
 import { STORE_KEYS } from "@/stores";
+import PropTypes from "prop-types";
 
 class FilterByDate extends Component {
   constructor(props) {
@@ -56,3 +57,7 @@ export default compose(
     setPostQuery
   }))
 )(FilterByDate);
+
+FilterByDate.propTypes = {
+  setPostQuery: PropTypes.func.isRequired
+};
