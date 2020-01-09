@@ -1,5 +1,5 @@
 {
-  "name": "studen-demo-app",
+  "name": "adaptive-data-file-extract",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -50,7 +50,6 @@
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-prettier": "^3.1.1",
-    "mobx-react-devtools": "^6.1.1",
     "prettier": "^1.19.1",
     "react-app-rewired": "^2.1.5"
   }
