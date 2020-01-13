@@ -43,7 +43,7 @@ const FilterDownload = ({ getDownloadFile, postQuery }) => {
       <Button type="submit" variant="contained" onClick={handleDownload}>
         Download
       </Button>
-      <DownloadedModal openModal={isLoading} handleModalClose={handleModalClose} />
+      <DownloadedModal isTest={!!postQuery.test} openModal={isLoading} handleModalClose={handleModalClose} />
     </div>
   );
 };

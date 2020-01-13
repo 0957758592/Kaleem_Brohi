@@ -3,6 +3,7 @@ import { compose, withProps } from "recompose";
 import { inject, observer } from "mobx-react";
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 import { STORE_KEYS } from "@/stores";
@@ -34,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 }));
 const delay = (s) => new Promise(resolve => setTimeout(resolve, s * 1000));
 
-function DownloadedModal({ openModal, isEmptyData, handleModalClose, setEmptyData }) {
+function DownloadedModal({ openModal, isEmptyData, handleModalClose, setEmptyData, isTest }) {
     const classes = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
     let fadeText = "";
@@ -79,11 +80,11 @@ function DownloadedModal({ openModal, isEmptyData, handleModalClose, setEmptyDat
             >
                 <div style={modalStyle} className={classes.paper}>
                     <p id="simple-modal-description">
-                        {popupMessage(isEmptyData)}
+                        {isTest ? popupMessage(isEmptyData) : "Data By Test selection is mandatory"}
                     </p>
-                    <DownloadedModal />
-                    <div style={{ height: 20 }}>{fadeText === "" ? (!isEmptyData && <LinearProgress variant="query" color="primary" />) : !isEmptyData && fadeText}</div>
-
+                    {isTest ?
+                        <div style={{ height: 20 }}>{fadeText === "" ? (!isEmptyData && <LinearProgress variant="query" color="primary" />) : !isEmptyData && fadeText}</div> :
+                        <Button  fullWidth onClick={handleModalClose}>Ok</Button>}
                 </div>
             </Modal>
         </div>

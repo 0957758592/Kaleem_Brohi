@@ -121,10 +121,7 @@ class ViewModeStore {
   }
 
   setClassesOpt(value) {
-    this.optClasses = [...value];
-  }
-  setPostQuery(name, value) {
-    this.postQuery = {
+    this.optClassessetPostQuery= {
       ...this.postQuery,
       [name]: value
     };
@@ -145,7 +142,7 @@ class ViewModeStore {
         console.log("No Record found of given search")
         this.setEmptyData(true);
       }
-    })
+    }).catch(err => console.log(err))
   }
 
   downloadFile(setIsLoading, URL, data) {

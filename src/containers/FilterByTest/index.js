@@ -2,7 +2,7 @@ import React from "react";
 import SelectItem from "@/components/Select";
 
 const test = [
-  { name: "All", value: "A" },
+  { name: " ", value: "" },
   { name: "Math", value: "M" },
   { name: "Reading", value: "R" },
 ];
