@@ -30,7 +30,7 @@ const FilterDownload = ({ getDownloadFile, postQuery }) => {
     }
 
     setIsLoading(true);
-    await getDownloadFile(query, setIsLoading);
+    !postQuery.test ? null : await getDownloadFile(query, setIsLoading);
 
   };
 

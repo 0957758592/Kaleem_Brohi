@@ -142,7 +142,10 @@ class ViewModeStore {
         console.log("No Record found of given search")
         this.setEmptyData(true);
       }
-    }).catch(err => console.log(err))
+    }).catch(err => {
+      this.setEmptyData(true);
+      console.log("ERR" , err)
+    })
   }
 
   downloadFile(setIsLoading, URL, data) {

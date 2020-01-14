@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 
 import FilterByDate from '@/containers/FilterByDate';
 import FilterByTest from '@/containers/FilterByTest';
+import FilterByEvent from '@/containers/FilterByEvent';
 import FilterByCustomer from '@/containers/FilterByCustomer';
 import FilterByGrade from '@/containers/FilterByGrade';
 import FilterByDistrict from '@/containers/FilterByDistrict';
@@ -21,6 +22,7 @@ export default () => {
           <h1>Research Data</h1>
           <FilterByDate /><br />
           <FilterByTest /><br />
+          <FilterByEvent /><br />
           <FilterByCustomer /><br />
           <FilterByGrade /><br />
           <FilterByDistrict /><br />

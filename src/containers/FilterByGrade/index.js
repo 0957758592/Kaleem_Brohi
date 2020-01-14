@@ -5,7 +5,7 @@ import SelectItem from "@/components/Select";
 import { STORE_KEYS } from "@/stores";
 
 const grade = [
-  { name: " ", value: " " },
+  { name: " ", value: "" },
   { name: 3, value: 3 },
   { name: 4, value: 4 },
   { name: 5, value: 5 },
