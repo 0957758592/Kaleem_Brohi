@@ -4,6 +4,7 @@ import {
   getFilterOptionsBuilding,
   getFilterOptionsDistrict,
   getFilterOptionsClass,
+  getFilterOptionsEvent,
   //defaultConnection,
   getCSVFile
 } from "@/stores/wrd_apis";
@@ -15,6 +16,9 @@ class ViewModeStore {
 
   optDistricts = [];
   isDsSet = false;
+
+  optEvents = [];
+  isEvSet = false;
 
   optClasses = [];
   isClSet = false;
@@ -57,6 +61,13 @@ class ViewModeStore {
     })
 */
    // const getData = () => {
+       getFilterOptionsEvent().then(options => {
+         for (let i = 0; i < options.length; i++) {
+           this.optEvents.push(options[i] || "");
+         }
+         this.isEvSet = true;
+       });
+
     getFilterOptionsDistrict().then(options => {
       let districts = [];
       for (let i = 0; i < options.length; i++) {
@@ -119,6 +130,10 @@ class ViewModeStore {
   setBuildingOpt(value) {
     this.optBuildings = [...value];
   }
+
+    setIsEventsSelected(value) {
+      this.optEvents = value;
+    }
 
   setClassesOpt(value) {
     this.optClassessetPostQuery= {
@@ -183,6 +198,8 @@ decorate(ViewModeStore, {
   isBdSet: observable,
   optDistricts: observable,
   isDsSet: observable,
+  optEvents: observable,
+  isEvSet: observable,
   optClasses: observable,
   isClSet: observable,
   optStudents: observable,
@@ -194,6 +211,7 @@ decorate(ViewModeStore, {
   getDownloadFile: action,
   setBuildingOpt: action.bound,
   setDistrictsOpt: action.bound,
+  setIsEventsSelected: action.bound,
   setClassesOpt: action.bound,
   setPostQuery: action.bound,
   setIsBuildingsSelected: action.bound,

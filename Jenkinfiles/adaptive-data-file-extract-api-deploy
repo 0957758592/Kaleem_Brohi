@@ -1,0 +1,68 @@
+node("shared-jenkins"){
+
+    def SSH_CREDENTIALS_ID = '35cd86cd-49b5-4144-bfbc-d5b8f344f88e'
+
+    def DOCKER_ARTIFACT_REPO = "artifact-repo.service.rcsnp.rsiapps.internal:6069"
+    def DOCKER_IMAGE = "rcs/adaptive-data-file-extract-api"
+
+    def GITHUB_CREDENTIALS_ID = '9f628a55-a8da-49e7-b7e6-219f87ba1982'
+
+    def GITHUB_REPO = 'git@github.com:rsinsights/adaptive-data-file-extract-api.git'
+    def git_commit = null
+    def NOMAD_JOBFILE_DIR = './src/main/rcs-config/nomad'
+    def nomadJobFile = "${env.NOMAD_FILE}.nomad"
+
+    def ENV = "np"
+    env.BASTION_HOST_NAME = 'bastion'
+    env.AwsEnvironment = 'rcscorenp'
+    if (env.Environment == "prod" || env.Environment == "uat" ) {
+        ENV = "prod"
+	    env.AwsEnvironment = 'rcscoreprod'
+	    env.BASTION_HOST_NAME = 'bastion_prod'
+    }
+
+    def HOST_TO_RUN_THE_NOMAD_JOB_FROM = InetAddress.getByName('bastion').address.collect { it & 0xFF }.join('.')
+    def SSL_PARAMS = ' -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  '
+    def SSH_WITH_PARAMS = "ssh ${SSL_PARAMS} -l ec2-user"
+    def mvnHome = tool name: 'MAVEN_3_5_4', type: 'hudson.tasks.Maven$MavenInstallation'
+
+    stage ('Checkout adaptive-data-file-extract-api repo') {
+
+        git branch: env.GITHUB_BRANCH, credentialsId: GITHUB_CREDENTIALS_ID, url: GITHUB_REPO
+        sh "git rev-parse HEAD > commit"
+        git_commit = readFile('commit').trim()
+        v = version().minus("-SNAPSHOT") + "."+ "${currentBuild.displayName}".minus("#")
+    }
+
+    stage('Build docker container'){
+
+        sh "$mvnHome/bin/mvn clean install -Dmaven.test.skip=true"
+        docker.withTool('docker'){
+            def DOCKER_IMAGE_TAG = "${DOCKER_IMAGE}:${git_commit}"
+            sh " cs builder build -d ./target -f ./target/classes/docker/Dockerfile -t ${DOCKER_IMAGE_TAG}"
+        }
+    }
+
+    stage('Deploy adaptive-data-file-extract-api'){
+        sshagent (credentials: [SSH_CREDENTIALS_ID]) {
+
+                 sh "${SSH_WITH_PARAMS} ${HOST_TO_RUN_THE_NOMAD_JOB_FROM}  mkdir -p ${NOMAD_JOBFILE_DIR}"
+                 sh " pwd "
+                 sh " ls -lath "
+                 //sh " ls -lath  ./adaptive-data-file-extract-api"
+                 sh "sed -i 's/TAG/${git_commit}/g'  ${NOMAD_JOBFILE_DIR}/${nomadJobFile}"
+                 sh "sed -i 's/@@ENV@@/${ENV}/g'  ${NOMAD_JOBFILE_DIR}/${nomadJobFile}"
+                 sh "sed -i 's/ENVIRONMENT/${env.Environment}/g'  ${NOMAD_JOBFILE_DIR}/${nomadJobFile}"
+                 sh "sed -i 's/AWS_ENV/${env.AwsEnvironment}/g'   ${NOMAD_JOBFILE_DIR}/${nomadJobFile}"
+                 //sh "sed -i 's/NUMBER_OF_INSTANCES/${env.NUMBER_OF_INSTANCES}/g'  ${NOMAD_JOBFILE_DIR}/${nomadJobFile}"
+                 sh " scp ${SSL_PARAMS}  ${NOMAD_JOBFILE_DIR}/${nomadJobFile} ec2-user@${HOST_TO_RUN_THE_NOMAD_JOB_FROM}:${NOMAD_JOBFILE_DIR} "
+                 sh "${SSH_WITH_PARAMS} ${HOST_TO_RUN_THE_NOMAD_JOB_FROM} cs run   ${NOMAD_JOBFILE_DIR}/${nomadJobFile} "
+                 sh "${SSH_WITH_PARAMS} ${HOST_TO_RUN_THE_NOMAD_JOB_FROM} rm -rf ${NOMAD_JOBFILE_DIR}"
+        }
+    }
+}
+
+def version() {
+	def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
+	matcher ? matcher[0][1] : null
+}
