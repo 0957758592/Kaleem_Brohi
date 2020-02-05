@@ -23,12 +23,12 @@ export default () => {
           <FilterByDate /><br />
           <FilterByTest /><br />
           <FilterByEvent /><br />
-          <FilterByCustomer /><br />
+         {/* <FilterByCustomer /><br /> */}
           <FilterByGrade /><br />
           <FilterByDistrict /><br />
           <FilterByBuilding /><br />
           <FilterByClass /><br />
-          <FilterByStudent /><br /><br />
+          {/* <FilterByStudent /><br /><br /> */}
           <FilterDownload />
         </Grid>{" "}
       </Grid>

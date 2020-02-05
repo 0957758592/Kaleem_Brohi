@@ -3,11 +3,11 @@ node("shared-jenkins"){
     def SSH_CREDENTIALS_ID = '35cd86cd-49b5-4144-bfbc-d5b8f344f88e'
 
     def DOCKER_ARTIFACT_REPO = "artifact-repo.service.rcsnp.rsiapps.internal:6069"
-    def DOCKER_IMAGE = "rcs/adaptive-data-file-extract-api"
+    def DOCKER_IMAGE = "rcs/adaptive-data-file-extract"
 
     def GITHUB_CREDENTIALS_ID = '9f628a55-a8da-49e7-b7e6-219f87ba1982'
 
-    def GITHUB_REPO = 'git@github.com:rsinsights/adaptive-data-file-extract-api.git'
+    def GITHUB_REPO = 'git@github.com:rsinsights/adaptive-data-file-extract.git'
     def git_commit = null
     def NOMAD_JOBFILE_DIR = './src/main/rcs-config/nomad'
     def nomadJobFile = "${env.NOMAD_FILE}.nomad"
@@ -26,7 +26,7 @@ node("shared-jenkins"){
     def SSH_WITH_PARAMS = "ssh ${SSL_PARAMS} -l ec2-user"
     def mvnHome = tool name: 'MAVEN_3_5_4', type: 'hudson.tasks.Maven$MavenInstallation'
 
-    stage ('Checkout adaptive-data-file-extract-api repo') {
+    stage ('Checkout adaptive-data-file-extract repo') {
 
         git branch: env.GITHUB_BRANCH, credentialsId: GITHUB_CREDENTIALS_ID, url: GITHUB_REPO
         sh "git rev-parse HEAD > commit"
@@ -43,7 +43,7 @@ node("shared-jenkins"){
         }
     }
 
-    stage('Deploy adaptive-data-file-extract-api'){
+    stage('Deploy adaptive-data-file-extract'){
         sshagent (credentials: [SSH_CREDENTIALS_ID]) {
 
                  sh "${SSH_WITH_PARAMS} ${HOST_TO_RUN_THE_NOMAD_JOB_FROM}  mkdir -p ${NOMAD_JOBFILE_DIR}"
