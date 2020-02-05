@@ -33,8 +33,6 @@ node("shared-jenkins"){
     }
 
     stage('Build docker container'){
-
-        sh "$mvnHome/bin/mvn clean install -Dmaven.test.skip=true"
         docker.withTool('docker'){
             def DOCKER_IMAGE_TAG = "${DOCKER_IMAGE}:${git_commit}"
             sh " cs builder build -d ./ -f ./Dockerfile -t ${DOCKER_IMAGE_TAG}"
