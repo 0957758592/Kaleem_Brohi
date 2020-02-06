@@ -42,6 +42,7 @@ node("shared-jenkins"){
     stage('Deploy adaptive-data-file-extract'){
         sshagent (credentials: [SSH_CREDENTIALS_ID]) {
 
+                sh " ls -l "
                  sh "${SSH_WITH_PARAMS} ${HOST_TO_RUN_THE_NOMAD_JOB_FROM}  mkdir -p ${NOMAD_JOBFILE_DIR}"
                  sh "sed -i 's/TAG/${git_commit}/g'  ${nomadJobFile}"
                  sh "sed -i 's/@@ENV@@/${ENV}/g'  ${nomadJobFile}"
