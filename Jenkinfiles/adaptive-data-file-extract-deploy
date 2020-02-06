@@ -10,7 +10,7 @@ node("shared-jenkins"){
     def GITHUB_REPO = 'git@github.com:rsinsights/adaptive-data-file-extract.git'
     def git_commit = null
     def NOMAD_JOBFILE_DIR = './rcs-config/nomad'
-    def nomadJobFile = "${NOMAD_JOBFILE_DIR}/adapative-data-file-extract.nomad"
+    def nomadJobFile = "${NOMAD_JOBFILE_DIR}/adaptive-data-file-extract.nomad"
 
     def ENV = "np"
     env.BASTION_HOST_NAME = 'bastion'
