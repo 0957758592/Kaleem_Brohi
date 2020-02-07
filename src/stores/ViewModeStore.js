@@ -147,8 +147,8 @@ class ViewModeStore {
   }
 
   getDownloadFile = async (data, setIsLoading) => {
-    const URL = "http://localhost:9201/adaptive/v1/research?"
-    const checkingUrlData = "http://localhost:9201/adaptive/v1/research/count"
+    const URL = "https://adaptive-file-extract-api-prod.rcs.rsiapps.com/adaptive/v1/research?"
+    const checkingUrlData = "https://adaptive-file-extract-api-prod.rcs.rsiapps.com/adaptive/v1/research/count"
     axios.get(checkingUrlData, {}).then((res) => {
       console.log("res", res);
       if (res.data > 0) {
