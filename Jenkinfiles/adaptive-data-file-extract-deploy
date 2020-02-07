@@ -21,7 +21,7 @@ node("shared-jenkins"){
 	    env.BASTION_HOST_NAME = 'bastion_prod'
     }
 
-    def HOST_TO_RUN_THE_NOMAD_JOB_FROM = InetAddress.getByName('bastion').address.collect { it & 0xFF }.join('.')
+    def HOST_TO_RUN_THE_NOMAD_JOB_FROM = InetAddress.getByName(env.BASTION_HOST_NAME).address.collect { it & 0xFF }.join('.')
     def SSL_PARAMS = ' -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  '
     def SSH_WITH_PARAMS = "ssh ${SSL_PARAMS} -l ec2-user"
 
