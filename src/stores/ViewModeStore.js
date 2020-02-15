@@ -60,11 +60,8 @@ class ViewModeStore {
 
     })
 */
-   // const getData = () => {
        getFilterOptionsEvent().then(options => {
-         for (let i = 0; i < options.length; i++) {
-           this.optEvents.push(options[i] || "");
-         }
+         this.optEvents = [...options]
          this.isEvSet = true;
        });
 
