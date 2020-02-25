@@ -18,19 +18,21 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function SelectItem({ name, options, setPostQuery, setFlag }) {
+function SelectItem({ name, options, setPostQuery, setFlag, getDataFromServer, setOptions }) {
   const classes = useStyles();
   const [value, setValue] = React.useState("");
-  const handleChange = e => {
+  const handleChange = async e => {
     setValue(e.target.value);
-    // if (name === "Grade" && e.target.value) {
-    //   setFlag(true);
-    // }
+    if (getDataFromServer) {
+      const data = await getDataFromServer(e.target.value);
+      setOptions(data);
+    }
     if ((name === "Grade" || name === "Test") && e.target.value !== " ") {
       setFlag(true);
     } else if (e.target.value === " ") {
       setFlag(false);
     }
+
     setPostQuery(name.toLowerCase(), e.target.value);
   };
 
