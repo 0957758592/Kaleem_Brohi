@@ -43,6 +43,7 @@ class FilterByDate extends Component {
           onFocusChange={focusedInput => {
             this.setState({ focusedInput });
           }}
+          isOutsideRange={() => false}
         />
       </div>
     );
