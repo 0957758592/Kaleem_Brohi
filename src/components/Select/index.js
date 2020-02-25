@@ -26,7 +26,7 @@ function SelectItem({ name, options, setPostQuery, setFlag }) {
     // if (name === "Grade" && e.target.value) {
     //   setFlag(true);
     // }
-    if (name === "Grade" && e.target.value !== " ") {
+    if ((name === "Grade" || name === "Test") && e.target.value !== " ") {
       setFlag(true);
     } else if (e.target.value === " ") {
       setFlag(false);

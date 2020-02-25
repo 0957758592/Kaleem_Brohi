@@ -38,6 +38,8 @@ class ViewModeStore {
 
   isClassSelected = false;
 
+  isTestSelected = false;
+
   isEmptyData = false;
 
   isConnectionError = false;
@@ -96,6 +98,10 @@ class ViewModeStore {
     // });
    // }
   }
+
+  setIsTestSelected = (value) => {
+    this.isTestSelected = value;
+  };
 
   setIsGradeSelected = (value) => {
     this.isGradeSelected = value;
@@ -202,6 +208,7 @@ decorate(ViewModeStore, {
   optStudents: observable,
   isStSet: observable,
   postQuery: observable,
+  isTestSelected: observable,
   isDistrictSelected: observable,
   isBuildingsSelected: observable,
   isGradeSelected: observable,
@@ -212,6 +219,7 @@ decorate(ViewModeStore, {
   setClassesOpt: action.bound,
   setPostQuery: action.bound,
   setIsBuildingsSelected: action.bound,
+  setIsTestSelected: action.bound,
   setIsDistrictSelected: action.bound,
   setIsGradeSelected: action,
   isEmptyData: observable,
