@@ -1,5 +1,6 @@
 import React from "react";
 import { compose, withProps } from "recompose";
+import moment from "moment";
 import { inject, observer } from "mobx-react";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -18,13 +19,30 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function SelectItem({ name, options, setPostQuery, setFlag, getDataFromServer, setOptions }) {
+function SelectItem({
+  name,
+  options,
+  setPostQuery,
+  setFlag,
+  getDataFromServer,
+  setOptions,
+  postQuery
+}) {
   const classes = useStyles();
   const [value, setValue] = React.useState("");
   const handleChange = async e => {
     setValue(e.target.value);
     if (getDataFromServer) {
-      const data = await getDataFromServer(e.target.value);
+      let newFromDate, newToDate;
+      if (postQuery.fromDate && postQuery.toDate) {
+        newFromDate = moment(postQuery.fromDate).format("MM.DD.YYYY");
+        newToDate = moment(postQuery.toDate).format("MM.DD.YYYY");
+      }
+      const data = await getDataFromServer(
+        e.target.value,
+        newFromDate,
+        newToDate
+      );
       setOptions(data);
     }
     if ((name === "Grade" || name === "Test") && e.target.value !== " ") {
@@ -47,7 +65,10 @@ function SelectItem({ name, options, setPostQuery, setFlag, getDataFromServer, s
           onChange={handleChange}
         >
           {options.map(option => (
-            <MenuItem key={option.name} value={option.value === null ? option.name : option.value}>
+            <MenuItem
+              key={option.name}
+              value={option.value === null ? option.name : option.value}
+            >
               {option.name}
             </MenuItem>
           ))}
@@ -60,7 +81,8 @@ function SelectItem({ name, options, setPostQuery, setFlag, getDataFromServer, s
 export default compose(
   inject(STORE_KEYS.VIEWMODESTORE),
   observer,
-  withProps(({ [STORE_KEYS.VIEWMODESTORE]: { setPostQuery } }) => ({
-    setPostQuery
+  withProps(({ [STORE_KEYS.VIEWMODESTORE]: { setPostQuery, postQuery } }) => ({
+    setPostQuery,
+    postQuery
   }))
 )(SelectItem);
