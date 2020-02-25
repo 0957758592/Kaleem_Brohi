@@ -18,6 +18,8 @@ class ViewModeStore {
   optEvents = [];
   isEvSet = false;
 
+  optGrades = [];
+
   optClasses = [];
   isClSet = false;
 
@@ -120,6 +122,11 @@ class ViewModeStore {
   setEventsOpt(value) {
     this.optEvents = [...value];
   }
+
+  setGradesOpt(value) {
+    this.optGrades = [...value];
+  }
+
   setPostQuery(name, value) {
     this.postQuery = {
       ...this.postQuery,
@@ -196,6 +203,8 @@ decorate(ViewModeStore, {
   optDistricts: observable,
   isDsSet: observable,
   optEvents: observable,
+  setGradesOpt: action.bound,
+  optGrades: observable,
   isEvSet: observable,
   optClasses: observable,
   isClSet: observable,
