@@ -1,4 +1,5 @@
 import React from "react";
+import uuid from "uuid";
 import { compose, withProps } from "recompose";
 import { inject, observer } from "mobx-react";
 import { makeStyles } from "@material-ui/core/styles";
@@ -88,7 +89,7 @@ const MultipleSelect = ({
           disabled={disabled}
         >
           {options.map(item => (
-            <MenuItem key={item.name} value={item.name}>
+            <MenuItem key={uuid()} value={item.name}>
               <Checkbox checked={nameItem.indexOf(item.name) > -1} />
               <ListItemText primary={item.name} />
             </MenuItem>
