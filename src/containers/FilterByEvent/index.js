@@ -3,6 +3,7 @@ import { compose, withProps } from "recompose";
 import { inject, observer } from "mobx-react";
 import Popper from "@material-ui/core/Popper";
 import MultipleSelect from "@/components/MultipleSelect";
+import {getFilterOptionsGrade} from "@/stores/wrd_apis";
 
 import { STORE_KEYS } from "@/stores";
 
@@ -11,7 +12,9 @@ const FilterByEvents = ({
   isDsSet,
   setEventsOpt,
   setIsEventsSelected,
-  isTestSelected
+  isTestSelected,
+  setGradesOpt,
+  setIsGradeSelected
 }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -30,6 +33,9 @@ const FilterByEvents = ({
         setOptions={setEventsOpt}
         disabled={!isTestSelected}
         setFlag={setIsEventsSelected}
+        setOptions={setGradesOpt}
+        getDataFromServer={getFilterOptionsGrade}
+        setFlag={setIsGradeSelected}
       />
       <Popper id={id} open={open} anchorEl={anchorEl}>
         <div>Please select data by test</div>
@@ -48,14 +54,18 @@ export default compose(
         isDsSet,
         setEventsOpt,
         setIsEventsSelected,
-        isTestSelected
+        isTestSelected,
+        setGradesOpt,
+        setIsGradeSelected
       }
     }) => ({
       optEvents,
       isDsSet,
       setEventsOpt,
       setIsEventsSelected,
-      isTestSelected
+      isTestSelected,
+      setGradesOpt,
+      setIsGradeSelected
     })
   )
 )(FilterByEvents);
