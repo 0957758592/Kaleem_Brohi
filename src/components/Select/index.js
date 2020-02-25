@@ -26,7 +26,8 @@ function SelectItem({
   setFlag,
   getDataFromServer,
   setOptions,
-  postQuery
+  postQuery,
+  disabled
 }) {
   const classes = useStyles();
   const [value, setValue] = React.useState("");
@@ -63,6 +64,7 @@ function SelectItem({
           id={name}
           value={value}
           onChange={handleChange}
+          disabled={disabled}
         >
           {options.map(option => (
             <MenuItem

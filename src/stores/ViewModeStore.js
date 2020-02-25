@@ -8,7 +8,6 @@ import {
 } from "@/stores/wrd_apis";
 
 class ViewModeStore {
-
   optBuildings = [];
   isBdSet = false;
 
@@ -28,9 +27,11 @@ class ViewModeStore {
 
   postQuery = {};
 
-  errorData = []
+  errorData = [];
 
   isGradeSelected = false;
+
+  isEventSelected = false;
 
   isBuildingsSelected = false;
 
@@ -92,26 +93,30 @@ class ViewModeStore {
     //}
     // this.isStSet = true;
     // });
-   // }
+    // }
   }
 
-  setIsTestSelected = (value) => {
+  setIsTestSelected = value => {
     this.isTestSelected = value;
   };
 
-  setIsGradeSelected = (value) => {
+  setIsEventSelected = value => {
+    this.isEventSelected = value;
+  };
+
+  setIsGradeSelected = value => {
     this.isGradeSelected = value;
   };
 
-  setIsBuildingsSelected = (value) => {
+  setIsBuildingsSelected = value => {
     this.isBuildingsSelected = value;
   };
 
-  setIsDistrictSelected = (value) => {
+  setIsDistrictSelected = value => {
     this.isDistrictSelected = value;
   };
 
-  setIsClassSelected = (value) => {
+  setIsClassSelected = value => {
     this.isClassSelected = value;
   };
 
@@ -134,67 +139,70 @@ class ViewModeStore {
     };
   }
 
-
   setBuildingOpt(value) {
     this.optBuildings = [...value];
   }
 
   setClassesOpt(value) {
-    this.optClassessetPostQuery= {
+    this.optClassessetPostQuery = {
       ...this.postQuery,
       [name]: value
     };
   }
 
-  setEmptyData = (condition) => {
+  setEmptyData = condition => {
     this.isEmptyData = condition;
-  }
+  };
 
   getDownloadFile = async (data, setIsLoading) => {
-    const URL = "https://adaptive-file-extract-api-prod.rcs.rsiapps.com/adaptive/v1/research?"
-    const checkingUrlData = "https://adaptive-file-extract-api-prod.rcs.rsiapps.com/adaptive/v1/research/count"
-    axios.get(checkingUrlData, {}).then((res) => {
-      console.log("res", res);
-      if (res.data > 0) {
-        this.downloadFile(setIsLoading, URL, data)
-      } else {
-        console.log("No Record found of given search")
-        this.setEmptyData(true);
-      }
-    }).catch(err => {
-      this.setEmptyData(true);
-      console.log("ERR" , err)
-    })
-  }
-
-  downloadFile(setIsLoading, URL, data) {
-  console.log(`${URL}${data}`)
-
-  const URI = !data ? URL : `${URL}${data}`
-    axios.get(URI, {
-    })
-      .then((res) => {
-        if (res) {
-          console.log("res", res)
-          window.location.href = `${URL}${data}`
-          console.log("href")
-          return res
+    const URL =
+      "https://adaptive-file-extract-api-prod.rcs.rsiapps.com/adaptive/v1/research?";
+    const checkingUrlData =
+      "https://adaptive-file-extract-api-prod.rcs.rsiapps.com/adaptive/v1/research/count";
+    axios
+      .get(checkingUrlData, {})
+      .then(res => {
+        console.log("res", res);
+        if (res.data > 0) {
+          this.downloadFile(setIsLoading, URL, data);
+        } else {
+          console.log("No Record found of given search");
+          this.setEmptyData(true);
         }
       })
-      .then((res) => {
+      .catch(err => {
+        this.setEmptyData(true);
+        console.log("ERR", err);
+      });
+  };
+
+  downloadFile(setIsLoading, URL, data) {
+    console.log(`${URL}${data}`);
+
+    const URI = !data ? URL : `${URL}${data}`;
+    axios
+      .get(URI, {})
+      .then(res => {
+        if (res) {
+          console.log("res", res);
+          window.location.href = `${URL}${data}`;
+          console.log("href");
+          return res;
+        }
+      })
+      .then(res => {
         //console.log("data", data)
         //window.open(`${URL}${data}`, "_blanc");
         //window.location.href = URL;
-        console.log("res2", res)
+        console.log("res2", res);
       })
       .catch(err => console.log("err", err))
       .finally(() => {
-       //window.open(URI, "_blanc");
-       console.log("finally")
-        setIsLoading(false)
-      })
+        //window.open(URI, "_blanc");
+        console.log("finally");
+        setIsLoading(false);
+      });
   }
-
 }
 
 decorate(ViewModeStore, {
@@ -215,6 +223,7 @@ decorate(ViewModeStore, {
   isDistrictSelected: observable,
   isBuildingsSelected: observable,
   isGradeSelected: observable,
+  isEventSelected: observable,
   getDownloadFile: action,
   setBuildingOpt: action.bound,
   setDistrictsOpt: action.bound,
@@ -224,6 +233,7 @@ decorate(ViewModeStore, {
   setPostQuery: action.bound,
   setIsBuildingsSelected: action.bound,
   setIsTestSelected: action.bound,
+  setIsEventSelected: action.bound,
   setIsDistrictSelected: action.bound,
   setIsGradeSelected: action,
   isEmptyData: observable,
