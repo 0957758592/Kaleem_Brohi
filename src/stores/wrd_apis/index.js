@@ -30,7 +30,7 @@ export const getFilterOptionsBuilding = ids =>
 export const getFilterOptionsGrade = ids =>
   axios
     .get(
-      `https://adaptive-file-extract-api-prod.rcs.rsiapps.com/adaptive/v1/research/filters?level=grade&ids=${ids}`
+      `https://adaptive-file-extract-api-prod.rcs.rsiapps.com/adaptive/v1/research/filters?level=grade${ids ? "&ids="+ids : ""}`
     )
     .then(res => res.data || []);
 

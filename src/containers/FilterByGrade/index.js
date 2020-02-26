@@ -2,16 +2,16 @@ import React from "react";
 import { compose, withProps } from "recompose";
 import { inject, observer } from "mobx-react";
 import map from "lodash/map";
-import SelectItem from "@/components/Select";
+import MultipleSelect from "@/components/MultipleSelect";
 import { STORE_KEYS } from "@/stores";
 
 function FilterByGrade({ setIsGradeSelected, optGrades }) {
   return (
-    <SelectItem
-      name="Grade"
+    <MultipleSelect
+      name="grade"
       options={map(optGrades, item => ({ ...item, value: item.name }))}
       setFlag={setIsGradeSelected}
-      disabled={!optGrades.length}
+      // disabled={!optGrades.length}
     />
   );
 }

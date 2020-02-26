@@ -159,8 +159,9 @@ class ViewModeStore {
       "https://adaptive-file-extract-api-prod.rcs.rsiapps.com/adaptive/v1/research?";
     const checkingUrlData =
       "https://adaptive-file-extract-api-prod.rcs.rsiapps.com/adaptive/v1/research/count";
+      
     axios
-      .get(checkingUrlData, {})
+      .get(`${checkingUrlData}${data}`, {})
       .then(res => {
         console.log("res", res);
         if (res.data > 0) {
